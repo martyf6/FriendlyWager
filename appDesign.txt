@@ -1,1 +1,14 @@
-step 1 - create the login page.
+User Credentials:
+
+we need a way to persist user credentials in the application.  
+In the same manner that twitter, facebook, etc. only requires you to login once, then remembers you every time you
+open up the application again, we need to store this data.
+
+The way this works in Android apps is using SharedPreferences (http://developer.android.com/guide/topics/data/data-storage.html#pref)
+To be secure, it is probably ideal to store a hashed password (instead of the raw string).
+We also need a way to store session data - essentially a cookie, so that we don't need to pass the username and password
+back and forth to the server on every single request.
+We can probably achieve this by first initiating a login request with the username and password to the server.
+Then, the server will pass back a session object (some sort of hashed session id).
+This id will be stored in the applications memory and wont be persisted.  Subsequent requests from the application
+will carry this id so that the server knows the user has already been logged in and is good to go.
