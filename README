@@ -1,4 +1,4 @@
 This project is configured to work with Android 2.1
 
-Make sure to not check in your .classpath, or any files in the bin/ directory
-To do this easily with git - create a new file named .gitignore in the base project directory.  Add .classpath and bin/ on separate lines in this file, and git will know to ignore these files in subsequent commits.
+Make sure to not check in any files in the bin/ directory
+To do this easily with git - create a new file named .gitignore in the base project directory.  Add bin/ on the first line in this file, and git will know to ignore these files in subsequent commits.
