@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <TextView  
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content" 
+    	android:text="@string/welcomeTitle" />
+    
+    <Button
+        android:id="@+id/createwager"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/createWager" 
+        android:onClick="onCreateWagerClicked" />
+    
+    <Button
+        android:id="@+id/findwager"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/findWager" 
+        android:onClick="onFindWagerClicked" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="fill_parent"
+       	android:layout_height="wrap_content"
+        android:onClick="onLogoutClicked"
+        android:text="@string/logout" />
+    
+    <Button
+        android:id="@+id/help"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/help" 
+        android:onClick="onHelpClicked" />
+
+</LinearLayout>
