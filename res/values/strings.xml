@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, FriendlyWager!</string>
     <string name="app_name">FriendlyWager</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="email">Email:</string>
     <string name="password">Password:</string>
     <string name="noAccount">don\'t have an account?</string>
+    <string name="welcome">Welcome To Friendly Wager!</string>
+    <string name="createWager">Create New Wager(s)</string>
+    <string name="findWager">Find Existing Wager</string>
+    <string name="logout">Logout</string>
+    <string name="help">Help</string>
 
 </resources>

@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -43,7 +44,9 @@ public class FriendlyWager extends Activity {
 	}
    
    public void onRegisterClicked(View v) {
-	   Toast.makeText(FriendlyWager.this, "Opening Registration Page", Toast.LENGTH_SHORT).show();
+	   // For now just go to welcome screen
+	   Intent goToWelcomePage = new Intent(FriendlyWager.this, Welcome.class);
+	   startActivity(goToWelcomePage);
    }
    
 	private void loginToDatabase(String username, String password) {

@@ -31,11 +31,11 @@
         android:inputType="textPassword" />
 
     <Button
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login" 
-            android:onClick="onLoginClicked" />
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login" 
+        android:onClick="onLoginClicked" />
 
     <TextView
         android:id="@+id/textView1"
@@ -48,7 +48,7 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onRegisterClicked"
-        android:text="@string/register" />
+        android:text="@string/register"
+        android:onClick="onRegisterClicked" />
 
 </LinearLayout>
