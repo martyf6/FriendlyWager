@@ -1,12 +1,12 @@
 package com.friendlywagerapp;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -19,6 +19,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -40,14 +42,22 @@ public class FriendlyWager extends Activity {
    }
    
    public void onLoginClicked(View v) {
-	    final EditText emailField = (EditText) findViewById(R.id.emailText);
-	    String email = emailField.getText().toString();
+	    final EditText usernameField = (EditText) findViewById(R.id.usernameText);
+	    String username = usernameField.getText().toString();
 	    final EditText passwordField = (EditText) findViewById(R.id.passwordText);
 	    String password = passwordField.getText().toString();
-	    String msg = "email: " + email + "\npassword:" + password;
-	    Log.d(TAG,msg);
-	    Toast.makeText(FriendlyWager.this, msg, Toast.LENGTH_SHORT).show();
-	    loginToDatabase(email, password);
+	    // encrypt the password
+        try {
+        	MessageDigest cript = MessageDigest.getInstance("SHA-1");
+            cript.reset();
+			cript.update(password.getBytes("utf8"));
+			String encryptedPassword = new String(Hex.encodeHex(cript.digest()));
+			loginToDatabase(username, encryptedPassword);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}  catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 	}
    
    public void onRegisterClicked(View v) {
@@ -77,23 +87,27 @@ public class FriendlyWager extends Activity {
 			HttpPost httppost = new HttpPost("http://friendlywagerapp.com/session.php");
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			// Execute HTTP Post Request
-	        ResponseHandler<String> responseHandler = new BasicResponseHandler();
-			String response = httpclient.execute(httppost, responseHandler);
-			Toast.makeText(FriendlyWager.this, response, Toast.LENGTH_SHORT).show();
-
-			/* parse json data
+			ResponseHandler<String> responseHandler = new BasicResponseHandler();
+			result = httpclient.execute(httppost, responseHandler);
+	        
+			/* parse json data */
 			try {
-				JSONArray jArray = new JSONArray(result);
-				for (int i = 0; i < jArray.length(); i++) {
-					JSONObject json_data = jArray.getJSONObject(i);
-					System.out.println("id: " + json_data.getInt("id")
-							+ ", name: " + json_data.getString("name")
-							+ ", sex: " + json_data.getInt("sex")
-							+ ", birthyear: " + json_data.getInt("birthyear"));
+				JSONObject json_data = new JSONObject(result);
+				String success = json_data.getString("success");
+				if (success.equals("false")){
+					String error = json_data.getString("error");
+					error = error.substring(2, error.length()-2); // strip out array representation
+					Log.i(TAG,error);
+					Toast.makeText(FriendlyWager.this, error, Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(FriendlyWager.this, "Login successful", Toast.LENGTH_SHORT).show();
+					Intent goToWelcomePage = new Intent(FriendlyWager.this, Welcome.class);
+					startActivity(goToWelcomePage);
 				}
 			} catch (JSONException e) {
+				Toast.makeText(FriendlyWager.this, e.toString(), Toast.LENGTH_SHORT).show();
 				System.out.println("Error parsing data " + e.toString());
-			}*/
+			}
 		} catch (Exception e) {
 			Toast.makeText(FriendlyWager.this, "Error in http connection " + e.toString(), Toast.LENGTH_SHORT).show();
 		}
