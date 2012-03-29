@@ -1,26 +1,35 @@
 package com.friendlywagerapp;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Hex;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -71,7 +80,6 @@ public class FriendlyWager extends Activity {
    }
    
 	private void loginToDatabase(String username, String password) {
-		String result = "";
 		// the year data to send
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 		nameValuePairs.add(new BasicNameValuePair("submit", "Login"));
@@ -81,35 +89,74 @@ public class FriendlyWager extends Activity {
 
 		// http post
 		try {
+			// Create a local instance of cookie store
+		    CookieStore cookieStore = new BasicCookieStore();
+
+		    // Create local HTTP context
+		    HttpContext localContext = new BasicHttpContext();
+		    // Bind custom cookie store to the local context
+		    localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+			
 			HttpParams params = new BasicHttpParams();
 			params.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-			HttpClient httpclient = new DefaultHttpClient(params);
+			DefaultHttpClient httpclient = new DefaultHttpClient(params);
 			HttpPost httppost = new HttpPost("http://friendlywagerapp.com/session.php");
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			// Execute HTTP Post Request
-			ResponseHandler<String> responseHandler = new BasicResponseHandler();
-			result = httpclient.execute(httppost, responseHandler);
-	        
+			HttpResponse response = httpclient.execute(httppost, localContext);
+	        JSONArray responseJSON = parseToJSON(response);
 			/* parse json data */
-			try {
-				JSONObject json_data = new JSONObject(result);
-				String success = json_data.getString("success");
-				if (success.equals("false")){
-					String error = json_data.getString("error");
-					error = error.substring(2, error.length()-2); // strip out array representation
-					Log.i(TAG,error);
-					Toast.makeText(FriendlyWager.this, error, Toast.LENGTH_SHORT).show();
+	        JSONObject result = responseJSON.getJSONObject(0);
+			String success = result.getString("success");
+			if (success.equals("false")){
+				String error = result.getString("error");
+				error = error.substring(2, error.length()-2); // strip out array representation
+				Log.i(TAG,error);
+				Toast.makeText(FriendlyWager.this, error, Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(FriendlyWager.this, "Login successful", Toast.LENGTH_SHORT).show();
+				List<Cookie> cookies = cookieStore.getCookies();
+
+				if (cookies.isEmpty()) {
+				    System.out.println("None");
 				} else {
-					Toast.makeText(FriendlyWager.this, "Login successful", Toast.LENGTH_SHORT).show();
-					Intent goToWelcomePage = new Intent(FriendlyWager.this, Welcome.class);
-					startActivity(goToWelcomePage);
+				    for (int i = 0; i < cookies.size(); i++) {
+				        System.out.println("- " + cookies.get(i).toString());
+				    }
 				}
-			} catch (JSONException e) {
-				Toast.makeText(FriendlyWager.this, e.toString(), Toast.LENGTH_SHORT).show();
-				System.out.println("Error parsing data " + e.toString());
+				Intent goToWelcomePage = new Intent(FriendlyWager.this, Welcome.class);
+				startActivity(goToWelcomePage);
 			}
 		} catch (Exception e) {
 			Toast.makeText(FriendlyWager.this, "Error in http connection " + e.toString(), Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	private JSONArray parseToJSON (HttpResponse response){
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			StringBuilder builder = new StringBuilder();
+			for (String line = null; (line = reader.readLine()) != null;) {
+			    builder.append(line).append("\n");
+			}
+			JSONTokener tokener = new JSONTokener(builder.toString());
+			JSONArray finalResult = new JSONArray(tokener);
+			return finalResult;
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			Toast.makeText(FriendlyWager.this, e.toString(), Toast.LENGTH_SHORT).show();
+			System.out.println("Error parsing data " + e.toString());
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
