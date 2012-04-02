@@ -6,9 +6,37 @@ open up the application again, we need to store this data.
 
 The way this works in Android apps is using SharedPreferences (http://developer.android.com/guide/topics/data/data-storage.html#pref)
 To be secure, it is probably ideal to store a hashed password (instead of the raw string).
+Should we store the session id instead? cookie?
+
+DONE: 
 We also need a way to store session data - essentially a cookie, so that we don't need to pass the username and password
 back and forth to the server on every single request.
 We can probably achieve this by first initiating a login request with the username and password to the server.
 Then, the server will pass back a session object (some sort of hashed session id).
 This id will be stored in the applications memory and wont be persisted.  Subsequent requests from the application
 will carry this id so that the server knows the user has already been logged in and is good to go.
+
+
+TODO:
+
+- deal with errors (not by simply printing them, as currently implemented)
+
+- abstract session.php into login.php and session.php
+
+- http client needs to shutdown when exiting the app (so not to draw resources when idle)
+
+- server mysql connection needs to close after query
+
+- server transactions needs to be ACID
+
+- register should send an email confirmation before adding the user (server side script)
+
+- 'toast' messages should probably vanish - replace by adding text to the actual layout (in red for errors, etc.)
+	- fine for debug purposes
+
+- abstract MVC - create reusable sessions/login library (for other apps)
+
+- use user id instead of username in session object
+
+- request and responses should use ids as well (getWager(id) - where does the id come from? getWagers() should return all data (including wager data - making getWager obsolete)
+	- getWagers - returns wager name, id (has voted? - should probably return all data then.)
