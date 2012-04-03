@@ -7,25 +7,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class FriendlyWager {
+	
+	private static String TAG = "FriendlyWager";
 	
 	private String name;
 	private String location;
 	private String time;
-	private Boolean hasVoted;
+	private boolean hasVoted;
 	private Object vote;
+	private boolean isOwner;
 	
-	public FriendlyWager(String name, String location, String time){
+	public FriendlyWager(String name, String location, String time, boolean isOwner){
 		this.name = name;
 		this.location = location;
 		this.time = time;
+		this.isOwner = isOwner;
 		this.hasVoted = false;
 	}
 	
-	public FriendlyWager(String name, String location, String time, Object vote){
+	public FriendlyWager(String name, String location, String time, boolean isOwner, Object vote){
 		this.name = name;
 		this.location = location;
 		this.time = time;
+		this.isOwner = isOwner;
 		this.hasVoted = vote == null;
 		this.vote = vote;
 	}
@@ -42,6 +49,10 @@ public class FriendlyWager {
 		return time;
 	}
 	
+	public boolean isOwner(){
+		return isOwner;
+	}
+	
 	public boolean hasVoted(){
 		return hasVoted;
 	}
@@ -55,12 +66,13 @@ public class FriendlyWager {
 			String eventName = wager.getString("event");
 			String location = wager.getString("location");
 			String time = wager.getString("time");
+			boolean isOwner = wager.getBoolean("isOwner");
 			boolean hasVoted = wager.getString("hasVoted").equals("1");
 			if (hasVoted) {
 				Object vote = wager.get("vote");
-				return new FriendlyWager(eventName, location, time, vote);
+				return new FriendlyWager(eventName, location, time, isOwner, vote);
 			} else {
-				return new FriendlyWager(eventName, location, time);
+				return new FriendlyWager(eventName, location, time, isOwner);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

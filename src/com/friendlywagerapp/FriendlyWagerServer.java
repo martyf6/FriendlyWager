@@ -105,6 +105,22 @@ public class FriendlyWagerServer {
 		return contactServer(nameValuePairs, url, Method.GET);
 	}
 	
+	public static JSONObject inviteUser(String wagerName, String username) {
+		// create the POST arguments
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+		nameValuePairs.add(new BasicNameValuePair("wagerName", wagerName));
+		nameValuePairs.add(new BasicNameValuePair("username", username));
+		String url = "http://friendlywagerapp.com/send_invites.php";
+		JSONObject response = null;
+		try {
+			response = contactServer(nameValuePairs, url, Method.POST).getJSONObject(0);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
 	private static JSONArray contactServer(ArrayList<NameValuePair> args, String url, Method method){
 		try {
 			FriendlyWagerContext fwContext = FriendlyWagerContext.getInstance();

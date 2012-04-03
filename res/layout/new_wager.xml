@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/newWagerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newWagerString"
+        android:textSize="36dp" />
+
+    <EditText
+        android:id="@+id/newWagerNameText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/newWagerLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newWagerLocation"
+        android:textSize="36dp" />
+
+    <EditText
+        android:id="@+id/newWagerLocationText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/newWagerTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newWagerTime"
+        android:textSize="36dp" />
+
+    <EditText
+        android:id="@+id/newWagerTimeText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newWagerNote" />
+
+    <Button
+        android:id="@+id/newWagerFinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newWagerFinish"
+        android:onClick="onFinishClicked"
+         />
+
+    <Button
+        android:id="@+id/newWagerCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newWagerCancel"
+        android:onClick="onCancelClicked"
+         />
+
+</LinearLayout>

@@ -12,5 +12,14 @@
     <string name="findWager">Find Existing Wager</string>
     <string name="logout">Logout</string>
     <string name="help">Help</string>
+    <string name="newWagerString">Wager Name</string>
+    <string name="newWagerLocation">Location</string>
+    <string name="newWagerTime">Time</string>
+    <string name="newWagerFinish">Finish</string>
+    <string name="newWagerCancel">Cancel</string>
+    <string name="newWagerNote">(note: votes will be hidden until after voting closes when the event begins)</string>
+    <string name="viewWagerVote">Vote</string>
+    <string name="viewWagerInvite">Invite</string>
+    <string name="viewWagerAdminInviteLabel">Invite</string>
 
 </resources>
