@@ -21,5 +21,8 @@
     <string name="viewWagerVote">Vote</string>
     <string name="viewWagerInvite">Invite</string>
     <string name="viewWagerAdminInviteLabel">Invite</string>
+    <string name="registerUsername">Username</string>
+    <string name="registerPassword">Password</string>
+    <string name="registerEmail">Email Address</string>
 
 </resources>

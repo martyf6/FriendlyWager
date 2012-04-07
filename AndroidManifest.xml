@@ -19,6 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Welcome"></activity>
+        <activity android:name=".Register"></activity>
+        <activity android:name=".NewWager"></activity>
+        <activity android:name=".ShowWagers"></activity>
+        <activity android:name=".ViewWager"></activity>
+        <activity android:name=".ViewWagerAdmin"></activity>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

@@ -53,22 +53,7 @@ public class Login extends Activity {
 	}
    
    public void onRegisterClicked(View v) {
-	   register();
+	   Intent goToRegisterPage = new Intent(Login.this, Register.class);
+	   startActivity(goToRegisterPage);
    }
-   
-   // test function for ensuring server-side scripting is working.
-   private void register() {
-		try {
-			JSONObject result = FriendlyWagerServer.register("test", "test2", "test2@test.com");
-			String success = result.getString("success");
-			if (success.equals("false")){
-				String error = result.getString("error");
-				Toast.makeText(Login.this, error, Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(Login.this, "successful", Toast.LENGTH_SHORT).show();
-			}
-		} catch (Exception e) {
-			Toast.makeText(Login.this, "Error in http connection " + e.toString(), Toast.LENGTH_SHORT).show();
-		}
-	}
 }
