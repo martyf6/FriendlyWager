@@ -42,3 +42,5 @@ TODO:
 	- getWagers - returns wager name, id (has voted? - should probably return all data then.)
 	
 - put links to online utils in emails (forgot pw etc.)
+
+- add wager types - for instance, boolean vote types, int vote types, string vote types, etc.
