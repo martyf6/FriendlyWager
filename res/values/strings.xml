@@ -24,5 +24,6 @@
     <string name="registerUsername">Username</string>
     <string name="registerPassword">Password</string>
     <string name="registerEmail">Email Address</string>
+    <string name="loginForgotPassword">Forgot Password</string>
 
 </resources>

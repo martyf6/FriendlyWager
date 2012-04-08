@@ -40,3 +40,5 @@ TODO:
 
 - request and responses should use ids as well (getWager(id) - where does the id come from? getWagers() should return all data (including wager data - making getWager obsolete)
 	- getWagers - returns wager name, id (has voted? - should probably return all data then.)
+	
+- put links to online utils in emails (forgot pw etc.)

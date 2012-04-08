@@ -20,12 +20,15 @@ public class Util {
 	private static String TAG = "Util";
 	
 	public static String encryptPassword (String pw){
+		Log.i(TAG,"Original pw: " + pw);
 		MessageDigest cript;
 		try {
 			cript = MessageDigest.getInstance("SHA-1");
 			cript.reset();
 			cript.update(pw.getBytes("utf8"));
-			return new String(Hex.encodeHex(cript.digest()));
+			String newPW = new String(Hex.encodeHex(cript.digest()));
+			Log.i(TAG,"New pw: " + newPW);
+			return newPW;
 		} catch (NoSuchAlgorithmException e) {
 			Log.e(TAG, "Cannot find encryption algorithm SHA-1.\n" + e.toString());
 			e.printStackTrace();

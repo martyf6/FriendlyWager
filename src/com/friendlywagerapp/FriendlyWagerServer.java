@@ -74,7 +74,7 @@ public class FriendlyWagerServer {
 		String url = "http://friendlywagerapp.com/forgot_password.php";
 		JSONObject response = null;
 		try {
-			response = contactServer(nameValuePairs, url, Method.GET).getJSONObject(0);
+			response = contactServer(nameValuePairs, url, Method.POST).getJSONObject(0);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

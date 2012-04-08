@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class Login extends Activity {
 	/** Called when the activity is first created. */
 	
-	private static final String TAG = "FriendlyWager";
+	private static final String TAG = "Login";
 
    @Override
    public void onCreate(Bundle savedInstanceState) {
@@ -55,5 +55,10 @@ public class Login extends Activity {
    public void onRegisterClicked(View v) {
 	   Intent goToRegisterPage = new Intent(Login.this, Register.class);
 	   startActivity(goToRegisterPage);
+   }
+   
+   public void onForgotPasswordClicked(View v) {
+	   Intent goToForgotPasswordPage = new Intent(Login.this, ForgotPassword.class);
+	   startActivity(goToForgotPasswordPage);
    }
 }
