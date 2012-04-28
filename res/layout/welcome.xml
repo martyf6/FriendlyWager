@@ -16,13 +16,20 @@
         android:text="@string/createWager" 
         android:onClick="onCreateWagerClicked" />
     
+    <ListView
+        android:id="@+id/showWagersList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <!-- 
     <Button
         android:id="@+id/findwager"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/findWager" 
         android:onClick="onFindWagerClicked" />
-
+    
     <Button
         android:id="@+id/logout"
         android:layout_width="fill_parent"
@@ -35,6 +42,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/help" 
-        android:onClick="onHelpClicked" />
+        android:onClick="onHelpClicked" /> -->
 
 </LinearLayout>

@@ -8,7 +8,7 @@
     <string name="password">Password:</string>
     <string name="noAccount">don\'t have an account?</string>
     <string name="welcome">Welcome To Friendly Wager!</string>
-    <string name="createWager">Create New Wager(s)</string>
+    <string name="createWager">Create New Wager</string>
     <string name="findWager">Find Existing Wager</string>
     <string name="logout">Logout</string>
     <string name="help">Help</string>
@@ -25,5 +25,6 @@
     <string name="registerPassword">Password</string>
     <string name="registerEmail">Email Address</string>
     <string name="loginForgotPassword">Forgot Password</string>
+    <string name="friendlyWagerBanner">FriendlyWager</string>
 
 </resources>
