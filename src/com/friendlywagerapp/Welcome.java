@@ -27,40 +27,58 @@ public class Welcome extends Activity {
 	
 	private static String TAG = "Welcome";
 	
-	protected List<FriendlyWager> wagers;
+	protected List<FriendlyWager> openedWagers = new ArrayList<FriendlyWager>();
+	protected List<FriendlyWager> closedWagers = new ArrayList<FriendlyWager>();
+	
+	private static final String defaultOpenedWager = "No opened events";
+	private static final String defaultClosedWager = "No closed events";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.welcome);
-	    createWagerList();
+	    createWagerLists();
 	}
 	
-	private void createWagerList() {
+	private void createWagerLists() {
 		List<FriendlyWager> wagers = getWagers();
 	    if (wagers == null) return;
 	    
-	    List<String> wagerNames = new ArrayList<String>();
+	    List<String> openWagerNames = new ArrayList<String>();
+	    List<String> closedWagerNames = new ArrayList<String>();
 	    for (FriendlyWager wager : wagers) {
-			wagerNames.add(wager.getName());
+			if (wager.isClosed()){
+				closedWagerNames.add(wager.getName());
+				closedWagers.add(wager);
+			}
+			else {
+				openWagerNames.add(wager.getName());
+				openedWagers.add(wager);
+			}
 			Log.i(TAG,"Found wager: " + wager.getName() + " and is owner? " + wager.isOwner());
 		}
-		if (wagerNames.isEmpty()) wagerNames.add("No events found for user");
-		else this.wagers = wagers;
-	    ListView listView = (ListView) findViewById(R.id.showWagersList);
-
+		if (openWagerNames.isEmpty()) openWagerNames.add(defaultOpenedWager);
+		if (closedWagerNames.isEmpty()) closedWagerNames.add(defaultClosedWager);
+		ListView openWagersView = (ListView) findViewById(R.id.showOpenWagersList);
+	    ListView closedWagersView = (ListView) findViewById(R.id.showClosedWagersList);
+	    
+	    
 	    // First paramenter - Context
 	    // Second parameter - Layout for the row
 	    // Third parameter - ID of the View to which the data is written
 	    // Forth - the Array of data
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-	    	android.R.layout.simple_list_item_1, android.R.id.text1, wagerNames);
+	    ArrayAdapter<String> openWagersAdapter = new ArrayAdapter<String>(this,
+	    	android.R.layout.simple_list_item_1, android.R.id.text1, openWagerNames);
+	    ArrayAdapter<String> closedWagersAdapter = new ArrayAdapter<String>(this,
+		    	android.R.layout.simple_list_item_1, android.R.id.text1, closedWagerNames);
 
 	    // Assign adapter to ListView
-	    listView.setAdapter(adapter);
-	    listView.setOnItemClickListener(new OnWagerClicked());
+	    openWagersView.setAdapter(openWagersAdapter);
+	    openWagersView.setOnItemClickListener(new OnWagerClicked(openedWagers, defaultOpenedWager));
+	    closedWagersView.setAdapter(closedWagersAdapter);
+	    closedWagersView.setOnItemClickListener(new OnWagerClicked(closedWagers, defaultClosedWager));
 	}
-	
+
 	public void onCreateWagerClicked(View v) {
 		Intent goToNewWagerPage = new Intent(Welcome.this, NewWager.class);
 		startActivity(goToNewWagerPage);
@@ -102,8 +120,17 @@ public class Welcome extends Activity {
 	
 	private class OnWagerClicked implements OnItemClickListener {
 		
+		protected List<FriendlyWager> wagers;
+		protected String defaultItem;
+		
+		public OnWagerClicked(List<FriendlyWager> wagers, String defaultItem){
+			this.wagers = wagers;
+			this.defaultItem = defaultItem;
+		}
+		
 		@Override
     	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			if (defaultItem.equals(parent.getAdapter().getItem(position))) return;
 			FriendlyWager selected = wagers.get(position);
 			Intent goToViewWager;
 			if (selected.isOwner()) goToViewWager = new Intent(Welcome.this, ViewWagerAdmin.class);
@@ -132,6 +159,9 @@ public class Welcome extends Activity {
         case R.id.logout:
             onLogoutClicked(null);
             return true;
+        case R.id.refreshList:
+        	createWagerLists();
+        	return true;
         default:
             return super.onOptionsItemSelected(item);
         }

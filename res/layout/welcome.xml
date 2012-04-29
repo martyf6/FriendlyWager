@@ -15,9 +15,31 @@
         android:layout_height="wrap_content"
         android:text="@string/createWager" 
         android:onClick="onCreateWagerClicked" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcomeOpenedWagersLabel"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#CCCCB2" />
     
     <ListView
-        android:id="@+id/showWagersList"
+        android:id="@+id/showOpenWagersList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ListView>
+    
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcomeClosedWagersLabel"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#CCCCB2" />
+    
+    <ListView
+        android:id="@+id/showClosedWagersList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
     </ListView>

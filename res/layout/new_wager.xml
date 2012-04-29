@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newWagerString"
-        android:textSize="36dp" />
+        android:textSize="21dp" />
 
     <EditText
         android:id="@+id/newWagerNameText"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newWagerLocation"
-        android:textSize="36dp" />
+        android:textSize="21dp" />
 
     <EditText
         android:id="@+id/newWagerLocationText"
@@ -29,16 +29,56 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newWagerDate"
+        android:textSize="21dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/newWagerDateSelectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onDateSelectClicked"
+            android:text="@string/newWagerDateSelect" />
+
+        <TextView
+            android:id="@+id/newWagerDateText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
         android:id="@+id/newWagerTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newWagerTime"
-        android:textSize="36dp" />
+        android:textSize="21dp" />
 
-    <EditText
-        android:id="@+id/newWagerTimeText"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/newWagerTimeSelectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onTimeSelectClicked"
+            android:text="@string/newWagerTimeSelect" />
+
+        <TextView
+            android:id="@+id/newWagerTimeText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView2"
@@ -46,20 +86,25 @@
         android:layout_height="wrap_content"
         android:text="@string/newWagerNote" />
 
-    <Button
-        android:id="@+id/newWagerFinish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newWagerFinish"
-        android:onClick="onFinishClicked"
-         />
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/newWagerCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newWagerCancel"
-        android:onClick="onCancelClicked"
-         />
+        <Button
+            android:id="@+id/newWagerFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onFinishClicked"
+            android:text="@string/newWagerFinish" />
+
+        <Button
+            android:id="@+id/newWagerCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCancelClicked"
+            android:text="@string/newWagerCancel" />
+
+    </LinearLayout>
 
 </LinearLayout>

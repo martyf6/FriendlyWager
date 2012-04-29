@@ -1,13 +1,17 @@
 package com.friendlywagerapp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.util.Log;
 
 public class FriendlyWager {
 	
@@ -59,6 +63,21 @@ public class FriendlyWager {
 	
 	public Object getVote(){
 		return vote;
+	}
+	
+	public boolean isClosed(){
+		SimpleDateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		TimeZone tz = TimeZone.getDefault();
+		dfm.setTimeZone(tz);
+		try {
+			Calendar gmtCal = new GregorianCalendar(tz);
+			Date current = gmtCal.getTime();
+			Date eventDate = dfm.parse(time);
+			return eventDate.before(current);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public static FriendlyWager createWager(JSONObject wager){

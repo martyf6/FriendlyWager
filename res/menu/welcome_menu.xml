@@ -6,4 +6,7 @@
     <item android:id="@+id/logout"
           android:icon="@android:drawable/ic_menu_revert"
           android:title="@string/logout" />
+    <item android:id="@+id/refreshList"
+          android:icon="@android:drawable/ic_menu_rotate"
+          android:title="@string/refresh" />
 </menu>
