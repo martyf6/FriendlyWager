@@ -1,3 +1,31 @@
+TODO:
+
+- action handlers for most of the events in all the pages I described above need coding:
+  - i believe i wrote the java->php backend for updating a user's vote, but it hasn't been hooked into the layout
+  - some page transitions need to be coded
+  - class hierarchy hasn't been fully visioned
+  - java date formatter to handle the string version of date/time for client side time handling (has the event passed, display a pretty time, etc.) - need to iron out what time handling is done on server vs. client
+- php backend for get_wagers needs to be updated:
+  - JSON data needs to be updated to include details about whether or not a particular wager has been closed
+  - JSON data needs to be updated to include details about the wager result
+- php backend for get_responses needs to be implemented (the list of participant responses to be shown for a closed wager)
+- java code needs to be written to handle disabling of viewing responses if the admin has not entered a result
+  (in other words, the admin needs to provide a result for the wager, but he/she cannot view what people answered before he provides this result)
+- what does it mean to invite someone? do you use a username or email, etc?  this needs to be communicated to the server, so the server php backend needs to know how to handle the string it is given
+- what does view participant responses do? does it determine if the wager is a number and see who is closest? does it check if the wager is a string and see if any participant matched the string correctly? what if the answer is a number of responses, and the user only needed to get one of them right? 
+  for instance - "Who will blackout on Thursday?" - jay vs. j vs. jason rome, or what about jay, corey or jay and corey, or jay and garvey and someone responded with 'jay' or 'corey', etc.  Maybe we can ignore the scoring for now and just view the responses and make your own judgement - there just won't be any leaderboard or score keeping
+- add styling to text, buttons, lists, labels, etc. (positioning, alignment, size, etc.)
+- clean up and remove Toast messages and other debugging code
+- php backend for sending an email confirmation to the user when registering
+
+other things that would be nice (but not completely necessary)
+separating out the invite users and update vote when an admin views his wager
+some sort of leader board
+remembering passwords
+automatic refresh of the welcome page (right now the refresh button needs to be accessed from the menu)
+colors and styles, etc.
+adding wager types (ints, strings, lists, etc.)
+
 User Credentials:
 
 we need a way to persist user credentials in the application.  
@@ -17,7 +45,7 @@ This id will be stored in the applications memory and wont be persisted.  Subseq
 will carry this id so that the server knows the user has already been logged in and is good to go.
 
 
-TODO:
+MORE TODO:
 
 - deal with errors (not by simply printing them, as currently implemented)
 
