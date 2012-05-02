@@ -20,7 +20,7 @@
     <string name="newWagerNote">(note: votes will be hidden until after voting closes when the event begins)</string>
     <string name="newWagerTimeSelect">Select a Time</string>
     <string name="newWagerDateSelect">Select a Date</string>
-    <string name="viewWagerVote">Vote</string>
+    <string name="viewWagerVote">Vote:</string>
     <string name="viewWagerInvite">Invite</string>
     <string name="viewWagerAdminInviteLabel">Invite</string>
     <string name="registerUsername">Username</string>
@@ -32,5 +32,10 @@
     <string name="refresh">Refresh</string>
     <string name="welcomeOpenedWagersLabel">Opened Wagers:</string>
     <string name="welcomeClosedWagersLabel">Closed Wagers:</string>
+    <string name="viewWagerResults">View Responses</string>
+    <string name="viewClosedWagerResult">Wager Result:</string>
+    <string name="viewClosedWagerUpdateResult">Update Result</string>
+    <string name="viewWagerVoteButton">Vote</string>
+    <string name="viewWagerDoneButton">Done</string>
 
 </resources>

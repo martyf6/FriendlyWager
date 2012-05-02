@@ -3,6 +3,20 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/viewWagerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wager Name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/viewWagerDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wager Details"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     
     <TextView
         android:id="@+id/viewWagerAdminText"
@@ -15,6 +29,13 @@
         android:id="@+id/viewWagerAdmin"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/viewWagerVoteButton"
+        android:onClick="onVoteClicked" />
 
     <TextView
         android:id="@+id/viewWagerAdminInviteLabel"
@@ -34,5 +55,12 @@
         android:layout_height="wrap_content"
         android:text="@string/viewWagerInvite"
         android:onClick="onInviteClicked" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/viewWagerDoneButton"
+        android:onClick="onDoneClicked" />
 
 </LinearLayout>

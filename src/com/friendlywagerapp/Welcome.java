@@ -138,7 +138,9 @@ public class Welcome extends Activity {
 			String vote = "no vote yet";
 			if (selected.getVote() != null) vote = selected.getVote().toString();
 			goToViewWager.putExtra("vote",vote);
-			goToViewWager.putExtra("wagerName",selected.getName().toString());
+			goToViewWager.putExtra("wagerName",selected.getName());
+			goToViewWager.putExtra("wagerLocation",selected.getLocation());
+			goToViewWager.putExtra("wagerTime",selected.getTime());
 			startActivity(goToViewWager);
     	}
 	}

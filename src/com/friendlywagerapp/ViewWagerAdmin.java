@@ -41,6 +41,14 @@ public class ViewWagerAdmin extends ViewWager {
 	    	}
 	    }
     }
-
-
+	
+	@Override
+	protected void finishedVoting() {
+		Toast.makeText(ViewWagerAdmin.this, "Successfully updated vote", Toast.LENGTH_SHORT).show();
+		return; // do nothing, wait til the admin clicks done.
+	}
+	
+	protected void onDoneClicked() {
+		finish();
+	}
 }
