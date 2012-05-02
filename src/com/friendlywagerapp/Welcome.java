@@ -133,9 +133,17 @@ public class Welcome extends Activity {
 			if (defaultItem.equals(parent.getAdapter().getItem(position))) return;
 			FriendlyWager selected = wagers.get(position);
 			Intent goToViewWager;
-			if (selected.isOwner()) goToViewWager = new Intent(Welcome.this, ViewWagerAdmin.class);
-			else goToViewWager = new Intent(Welcome.this, ViewWager.class);
-			String vote = "no vote yet";
+			String vote;
+			if (selected.isClosed()) {
+				if (selected.isOwner()) goToViewWager = new Intent(Welcome.this, ViewClosedWagerAdmin.class);
+				else goToViewWager = new Intent(Welcome.this, ViewClosedWager.class);
+				vote = "did not vote";
+				if (selected.getVote() != null) vote = selected.getVote().toString();
+			} else {
+				if (selected.isOwner()) goToViewWager = new Intent(Welcome.this, ViewWagerAdmin.class);
+				else goToViewWager = new Intent(Welcome.this, ViewWager.class);
+				vote = "no vote yet";
+			}
 			if (selected.getVote() != null) vote = selected.getVote().toString();
 			goToViewWager.putExtra("vote",vote);
 			goToViewWager.putExtra("wagerName",selected.getName());

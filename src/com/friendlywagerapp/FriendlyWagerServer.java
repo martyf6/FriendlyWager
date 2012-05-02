@@ -137,6 +137,14 @@ public class FriendlyWagerServer {
 		return response;
 	}
 	
+	public static JSONArray getWagerResponses(String wagerName) {
+		// create the GET arguments
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("wagerName", wagerName));
+		String url = "http://friendlywagerapp.com/get_wager_responses.php";
+		return contactServer(nameValuePairs, url, Method.GET);
+	}
+	
 	private static JSONArray contactServer(ArrayList<NameValuePair> args, String url, Method method){
 		try {
 			FriendlyWagerContext fwContext = FriendlyWagerContext.getInstance();

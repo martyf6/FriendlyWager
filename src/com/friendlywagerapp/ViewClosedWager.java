@@ -1,8 +1,9 @@
 package com.friendlywagerapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -13,10 +14,13 @@ private static String TAG = "ViewClosedWager";
 	
 	
 	protected int getTextField () {
-		return R.id.viewWager;
+		return R.id.viewClosedWagerVoteText;
+	}
+	protected int getResultField () {
+		return R.id.viewClosedWagerResultText;
 	}
 	protected int getLayout () {
-		return R.layout.view_wager;
+		return R.layout.view_closed_wager;
 	}
 
 	@Override
@@ -35,9 +39,17 @@ private static String TAG = "ViewClosedWager";
 	    voteField.setText(vote);
 	}
 	
-	protected void onViewResponsesClicked() {
+	public void onViewResponsesClicked(View v) {
 		// don't show responses until admin has updated the result
 		// switch to page that shows responses in list
 		// page should also display the winner at the top
+		
+		Intent goToViewResponses =  new Intent(ViewClosedWager.this, ViewResponses.class);
+		goToViewResponses.putExtra("wagerName",wagerName);
+		startActivity(goToViewResponses);
+	}
+	
+	public void onDoneClicked (View v) {
+		finish();
 	}
 }

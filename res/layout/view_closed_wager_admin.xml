@@ -38,6 +38,7 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onViewResponsesClicked"
         android:text="@string/viewWagerResults" />
 
     <TextView
@@ -57,5 +58,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/viewClosedWagerUpdateResult" />
+
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onDoneClicked"
+        android:text="@string/viewWagerDoneButton" />
 
 </LinearLayout>

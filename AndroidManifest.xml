@@ -26,6 +26,9 @@
         <activity android:name=".ShowWagers"></activity>
         <activity android:name=".ViewWager"></activity>
         <activity android:name=".ViewWagerAdmin"></activity>
+        <activity android:name=".ViewClosedWager"></activity>
+        <activity android:name=".ViewClosedWagerAdmin"></activity>
+        <activity android:name=".ViewResponses"></activity>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

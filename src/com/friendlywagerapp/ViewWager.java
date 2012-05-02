@@ -62,10 +62,9 @@ private static String TAG = "ViewWager";
 	    		Log.e(TAG, "Error parsing FriendlyWager response.\n" + e.toString());
 	    	}
 	    }
-		finishedVoting();
 	}
 	
-	protected void finishedVoting() {
+	public void onDoneClicked (View v) {
 		finish();
 	}
 }
