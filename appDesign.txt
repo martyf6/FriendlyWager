@@ -1,14 +1,8 @@
 TODO:
 
-- action handlers for most of the events in all the pages I described above need coding:
-  - i believe i wrote the java->php backend for updating a user's vote, but it hasn't been hooked into the layout
-  - some page transitions need to be coded
-  - class hierarchy hasn't been fully visioned
-  - java date formatter to handle the string version of date/time for client side time handling (has the event passed, display a pretty time, etc.) - need to iron out what time handling is done on server vs. client
+- class hierarchy hasn't been fully visioned
 - php backend for get_wagers needs to be updated:
-  - JSON data needs to be updated to include details about whether or not a particular wager has been closed
-  - JSON data needs to be updated to include details about the wager result
-- php backend for get_responses needs to be implemented (the list of participant responses to be shown for a closed wager)
+  - JSON data needs to be updated to include details about the wager result - how does this get in the database?
 - java code needs to be written to handle disabling of viewing responses if the admin has not entered a result
   (in other words, the admin needs to provide a result for the wager, but he/she cannot view what people answered before he provides this result)
 - what does it mean to invite someone? do you use a username or email, etc?  this needs to be communicated to the server, so the server php backend needs to know how to handle the string it is given
@@ -37,7 +31,12 @@ To be secure, it is probably ideal to store a hashed password (instead of the ra
 Should we store the session id instead? cookie?
 
 DONE: 
-We also need a way to store session data - essentially a cookie, so that we don't need to pass the username and password
+ - sync up layouts/pages
+ - implement client side view closed wager page
+ - php backend for get_responses needs to be implemented (the list of participant responses to be shown for a closed wager)
+ - java date formatter to handle the string version of date/time for client side time handling (has the event passed, display a pretty time, etc.) - need to iron out what time handling is done on server vs. client
+		for now, formatting and time handling is done on the client side.  will move to the server when deems necessary
+ - We also need a way to store session data - essentially a cookie, so that we don't need to pass the username and password
 back and forth to the server on every single request.
 We can probably achieve this by first initiating a login request with the username and password to the server.
 Then, the server will pass back a session object (some sort of hashed session id).

@@ -23,13 +23,10 @@ public class FriendlyWager {
 	private boolean hasVoted;
 	private Object vote;
 	private boolean isOwner;
+	private boolean isClosed;
 	
 	public FriendlyWager(String name, String location, String time, boolean isOwner){
-		this.name = name;
-		this.location = location;
-		this.time = time;
-		this.isOwner = isOwner;
-		this.hasVoted = false;
+		this (name, location, time, isOwner, null);
 	}
 	
 	public FriendlyWager(String name, String location, String time, boolean isOwner, Object vote){
@@ -39,6 +36,7 @@ public class FriendlyWager {
 		this.isOwner = isOwner;
 		this.hasVoted = vote == null;
 		this.vote = vote;
+		updateClosedStatus();
 	}
 	
 	public String getName(){
@@ -66,6 +64,10 @@ public class FriendlyWager {
 	}
 	
 	public boolean isClosed(){
+		return isClosed;
+	}
+	
+	public void updateClosedStatus() {
 		SimpleDateFormat dfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		TimeZone tz = TimeZone.getDefault();
 		dfm.setTimeZone(tz);
@@ -73,11 +75,10 @@ public class FriendlyWager {
 			Calendar gmtCal = new GregorianCalendar(tz);
 			Date current = gmtCal.getTime();
 			Date eventDate = dfm.parse(time);
-			return eventDate.before(current);
+			isClosed = eventDate.before(current);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return false;
 	}
 	
 	public static FriendlyWager createWager(JSONObject wager){
