@@ -5,6 +5,7 @@ TODO:
   - some page transitions need to be coded
   - class hierarchy hasn't been fully visioned
   - java date formatter to handle the string version of date/time for client side time handling (has the event passed, display a pretty time, etc.) - need to iron out what time handling is done on server vs. client
+	should probably read this article first: http://derickrethans.nl/storing-date-time-in-database.html
 - php backend for get_wagers needs to be updated:
   - JSON data needs to be updated to include details about whether or not a particular wager has been closed
   - JSON data needs to be updated to include details about the wager result
