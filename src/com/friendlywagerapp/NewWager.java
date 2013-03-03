@@ -1,6 +1,7 @@
 package com.friendlywagerapp;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import org.json.JSONObject;
 
@@ -9,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -74,10 +76,17 @@ public class NewWager extends Activity {
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
+		Calendar cal = Calendar.getInstance();
 	    switch (id) {
 	    case DATE_DIALOG_ID:
-	        return new DatePickerDialog(this,mDateSetListener, year, month, day);
+	    	year = (year == 0) ? cal.get(Calendar.YEAR) : year;
+	    	month = (month == 0) ? cal.get(Calendar.MONTH) : month;
+	    	day = (day == 0) ? cal.get(Calendar.DAY_OF_MONTH) : day;
+	    	Log.d("NewWager", "current date: " + year + ", " + month + ", " + day);
+	        return new DatePickerDialog(this, mDateSetListener, year, month, day);
 	    case TIME_DIALOG_ID:
+	    	hour = (hour == 0) ? cal.get(Calendar.HOUR_OF_DAY) : hour;
+	    	minute = (minute == 0) ? cal.get(Calendar.MINUTE) : minute;
 	    	return new TimePickerDialog(this, mTimeSetListener, hour, minute, false);
 	    }
 	    return null;
@@ -92,27 +101,35 @@ public class NewWager extends Activity {
 	}
 	
 	public void onFinishClicked(View v) {
-		final EditText eventNameField = (EditText) findViewById(R.id.newWagerNameText);
-	    String eventName = eventNameField.getText().toString();
-	    final EditText locationField = (EditText) findViewById(R.id.newWagerLocationText);
-	    String location = locationField.getText().toString();
-	    final TextView dateField = (TextView) findViewById(R.id.newWagerDateText);
-	    String date = dateField.getText().toString();
-	    final TextView timeField = (TextView) findViewById(R.id.newWagerTimeText);
-	    String time = timeField.getText().toString();
-	    try {
-			JSONObject result = FriendlyWagerServer.createWager(eventName, location, date + " " + time);
-			String success = result.getString("success");
-			if (success.equals("false")){
-				String error = result.getString("error");
-				Toast.makeText(NewWager.this, error, Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(NewWager.this, "successful", Toast.LENGTH_SHORT).show();
+		Date wagerDate = new Date (year, month, day, hour, minute);
+		Log.d("NewWager", "wager time: " + wagerDate);
+		// figure this out
+		Log.d("NewWager", "current time: " + Calendar.getInstance().getTime());
+    	if (wagerDate.before(Calendar.getInstance().getTime())) {
+    		Toast.makeText(NewWager.this, "Wagers cannot be created for events in the past.", Toast.LENGTH_SHORT).show();
+    	} else {
+			final EditText eventNameField = (EditText) findViewById(R.id.newWagerNameText);
+		    String eventName = eventNameField.getText().toString();
+		    final EditText locationField = (EditText) findViewById(R.id.newWagerLocationText);
+		    String location = locationField.getText().toString();
+		    final TextView dateField = (TextView) findViewById(R.id.newWagerDateText);
+		    String date = dateField.getText().toString();
+		    final TextView timeField = (TextView) findViewById(R.id.newWagerTimeText);
+		    String time = timeField.getText().toString();
+		    try {
+				JSONObject result = FriendlyWagerServer.createWager(eventName, location, date + " " + time);
+				String success = result.getString("success");
+				if (success.equals("false")){
+					String error = result.getString("error");
+					Toast.makeText(NewWager.this, error, Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(NewWager.this, "successful", Toast.LENGTH_SHORT).show();
+				}
+			} catch (Exception e) {
+				Toast.makeText(NewWager.this, "Error in http connection " + e.toString(), Toast.LENGTH_SHORT).show();
 			}
-		} catch (Exception e) {
-			Toast.makeText(NewWager.this, "Error in http connection " + e.toString(), Toast.LENGTH_SHORT).show();
-		}
-	    finish();
+		    finish();
+    	}
 	}
     
     public void onCancelClicked(View v) {

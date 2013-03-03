@@ -5,13 +5,13 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Login extends Activity {
@@ -23,6 +23,20 @@ public class Login extends Activity {
    public void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
        setContentView(R.layout.main);
+       final TextView registerText = (TextView) findViewById(R.id.register);
+	   registerText.setText(Html.fromHtml("<a href='#'>Register</a>"));
+	   registerText.setOnClickListener(new OnClickListener() {
+		    public void onClick(View v) {
+		        onRegisterClicked(v);
+		      }
+		  });
+	   final TextView forgotPasswordText = (TextView) findViewById(R.id.forgotPassword);
+	   forgotPasswordText.setText(Html.fromHtml("<a href='#'>Forgot Password</a>"));
+	   forgotPasswordText.setOnClickListener(new OnClickListener() {
+		    public void onClick(View v) {
+		    	onForgotPasswordClicked(v);
+		      }
+		  });
    }
    
    public void onLoginClicked(View v) {
@@ -55,13 +69,13 @@ public class Login extends Activity {
 	    }
 	}
    
-   public void onRegisterClicked(View v) {
-	   Intent goToRegisterPage = new Intent(Login.this, Register.class);
-	   startActivity(goToRegisterPage);
-   }
-   
    public void onForgotPasswordClicked(View v) {
 	   Intent goToForgotPasswordPage = new Intent(Login.this, ForgotPassword.class);
 	   startActivity(goToForgotPasswordPage);
+   }
+
+   public void onRegisterClicked(View v) {
+	   Intent goToRegisterPage = new Intent(Login.this, Register.class);
+	   startActivity(goToRegisterPage);
    }
 }

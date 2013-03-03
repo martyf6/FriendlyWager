@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 public class FriendlyWager {
 	
+	// Logging tag
 	private static String TAG = "FriendlyWager";
 	
 	private String name;
@@ -24,8 +25,11 @@ public class FriendlyWager {
 	private Object vote;
 	private boolean isOwner;
 	private boolean isClosed;
+	// we also might want:
+//  private String details;
 	
 	public FriendlyWager(String name, String location, String time, boolean isOwner){
+		// create a wager with a default vote
 		this (name, location, time, isOwner, null);
 	}
 	

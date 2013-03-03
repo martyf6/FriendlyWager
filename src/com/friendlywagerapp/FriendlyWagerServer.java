@@ -37,7 +37,7 @@ public class FriendlyWagerServer {
 		nameValuePairs.add(new BasicNameValuePair("username", username));
 		nameValuePairs.add(new BasicNameValuePair("password", encryptedPassword));
 		nameValuePairs.add(new BasicNameValuePair("remember","0"));
-		String url = "http://friendlywagerapp.com/session.php";
+		String url = "http://ec2-54-245-6-121.us-west-2.compute.amazonaws.com/session.php";
 		JSONObject response = null;
 		try {
 			response = contactServer(nameValuePairs, url, Method.POST).getJSONObject(0);
@@ -55,7 +55,7 @@ public class FriendlyWagerServer {
 		nameValuePairs.add(new BasicNameValuePair("username", username));
 		nameValuePairs.add(new BasicNameValuePair("password", encryptedPassword));
 		nameValuePairs.add(new BasicNameValuePair("email",email));
-		String url = "http://friendlywagerapp.com/register.php";
+		String url = "http://ec2-54-245-6-121.us-west-2.compute.amazonaws.com/register.php";
 		JSONObject response = null;
 		try {
 			response = contactServer(nameValuePairs, url, Method.POST).getJSONObject(0);
@@ -71,7 +71,7 @@ public class FriendlyWagerServer {
 		// create the GET arguments
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 		nameValuePairs.add(new BasicNameValuePair("username", username));
-		String url = "http://friendlywagerapp.com/forgot_password.php";
+		String url = "http://ec2-54-245-6-121.us-west-2.compute.amazonaws.com/forgot_password.php";
 		JSONObject response = null;
 		try {
 			response = contactServer(nameValuePairs, url, Method.POST).getJSONObject(0);
@@ -87,7 +87,7 @@ public class FriendlyWagerServer {
 		nameValuePairs.add(new BasicNameValuePair("wagerName", wagerName));
 		nameValuePairs.add(new BasicNameValuePair("location", location));
 		nameValuePairs.add(new BasicNameValuePair("time", time));
-		String url = "http://friendlywagerapp.com/new_wager.php";
+		String url = "http://ec2-54-245-6-121.us-west-2.compute.amazonaws.com/new_wager.php";
 		JSONObject response = null;
 		try {
 			response = contactServer(nameValuePairs, url, Method.POST).getJSONObject(0);
@@ -101,7 +101,7 @@ public class FriendlyWagerServer {
 	public static JSONArray getWagers() {
 		// create the GET arguments
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		String url = "http://friendlywagerapp.com/get_wagers.php";
+		String url = "http://ec2-54-245-6-121.us-west-2.compute.amazonaws.com/get_wagers.php";
 		return contactServer(nameValuePairs, url, Method.GET);
 	}
 	
@@ -110,7 +110,7 @@ public class FriendlyWagerServer {
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 		nameValuePairs.add(new BasicNameValuePair("wagerName", wagerName));
 		nameValuePairs.add(new BasicNameValuePair("username", username));
-		String url = "http://friendlywagerapp.com/send_invites.php";
+		String url = "http://ec2-54-245-6-121.us-west-2.compute.amazonaws.com/send_invites.php";
 		JSONObject response = null;
 		try {
 			response = contactServer(nameValuePairs, url, Method.POST).getJSONObject(0);
@@ -126,7 +126,7 @@ public class FriendlyWagerServer {
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 		nameValuePairs.add(new BasicNameValuePair("wagerName", wagerName));
 		nameValuePairs.add(new BasicNameValuePair("vote", vote));
-		String url = "http://friendlywagerapp.com/vote_wager.php";
+		String url = "http://ec2-54-245-6-121.us-west-2.compute.amazonaws.com/vote_wager.php";
 		JSONObject response = null;
 		try {
 			response = contactServer(nameValuePairs, url, Method.POST).getJSONObject(0);
@@ -141,7 +141,7 @@ public class FriendlyWagerServer {
 		// create the GET arguments
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("wagerName", wagerName));
-		String url = "http://friendlywagerapp.com/get_wager_responses.php";
+		String url = "http://ec2-54-245-6-121.us-west-2.compute.amazonaws.com/get_wager_responses.php";
 		return contactServer(nameValuePairs, url, Method.GET);
 	}
 	

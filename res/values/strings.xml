@@ -4,9 +4,10 @@
     <string name="app_name">FriendlyWager</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="username">Username:</string>
-    <string name="password">Password:</string>
-    <string name="noAccount">don\'t have an account?</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="noAccount">Don\'t have an account?</string>
+    <string name="divider"> | </string>
     <string name="welcome">Welcome To Friendly Wager!</string>
     <string name="createWager">Create New Wager</string>
     <string name="findWager">Find Existing Wager</string>
